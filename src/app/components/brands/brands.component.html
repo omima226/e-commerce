@@ -1,0 +1,19 @@
+<div class="row">
+  <h2 class="p-5 fw-bold">Available brands :</h2>
+  <div class="card m-2" style="width: 18rem" *ngFor="let brand of brands">
+    <img
+      height="200"
+      [src]="brand.image"
+      class="card-img-top"
+      [alt]="brand.name"
+    />
+    <div class="card-body">
+      <h4 class="card-title fw-bold text-main">{{ brand?.name }}</h4>
+    </div>
+  </div>
+  <a [routerLink]="['/home']">
+    <button class="btn bg-main text-white w-25 my-2 me-0">
+      click here to see our products
+    </button>
+  </a>
+</div>

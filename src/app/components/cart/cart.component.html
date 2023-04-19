@@ -1,0 +1,57 @@
+<div class="py-5">
+  <div class="d-flex align-items-center justify-content-between">
+    <h2 class="mb-5 fw-bolder">Your Cart:</h2>
+    <button class="btn btn-danger" (click)="clearAll()">Clear All</button>
+  </div>
+  <div class="row m-4 product p-2" *ngFor="let product of cartProducts">
+    <div class="col-sm-1">
+      <img class="w-100" [src]="product.product.imageCover" alt="" />
+    </div>
+    <div class="col-sm-11">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <h4 class="fw-bold">
+            {{ product.product.title.split(" ").slice(0, 2).join(" ") }}
+          </h4>
+          <p class="text-main fw-bold">{{ product.product.category.name }}</p>
+          <span class="text-muted fw-bold font-sm">{{
+            product.price | currency : "EGP"
+          }}</span>
+          <button
+            class="btn text-danger d-block m-3 align-items-center"
+            (click)="removeCartProducts(product.product.id)"
+          >
+            <i class="fa-regular fa-trash-can"></i>Remove
+          </button>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="updateCartProducts(product.product.id, product.count - 1)"
+          >
+            -
+          </button>
+          <span class="m-3">{{ product.count }}</span>
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="updateCartProducts(product.product.id, product.count + 1)"
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn bg-main text-white my-3">
+    <a
+      routerLink="/checkout/{{ cartId }}"
+      style="text-decoration: none"
+      class="text-white"
+    >
+      Online Payment
+      <img src="assets/images/pngwing.com (4).png" width="50px" alt="" />
+    </a>
+  </button>
+</div>

@@ -1,0 +1,59 @@
+<div class="w-75 mx-auto py-d pt-5">
+  <h4 class="pb-2">Login Now:</h4>
+  <div class="alert alert-danger" *ngIf="apiError">
+    {{ apiError }}
+  </div>
+  <form (ngSubmit)="handelLogin(loginForm)" [formGroup]="loginForm">
+
+    <label for="email">email:</label>
+    <input
+      type="email"
+      formControlName="email"
+      id="email"
+      class="form-control mb-2"
+    />
+    <div
+      *ngIf="
+        loginForm.get('email')?.errors && loginForm.get('email')?.touched
+      "
+      class="alert alert-danger"
+    >
+      <p class="m-0" *ngIf="loginForm.get('email')?.getError('email')">
+        Email invalid
+      </p>
+      <p class="m-0" *ngIf="loginForm.get('email')?.getError('required')">
+        Email is required
+      </p>
+    </div>
+    <label for="password">password:</label>
+    <input
+      type="password"
+      formControlName="password"
+      id="password"
+      class="form-control mb-2"
+    />
+    <div
+      *ngIf="
+        loginForm.get('password')?.errors &&
+        loginForm.get('password')?.touched
+      "
+      class="alert alert-danger"
+    >
+      <p class="m-0" *ngIf="loginForm.get('password')?.getError('pattern')">
+        Enter Minimum eight characters, at least one letter, one number and one
+        special character(begin with capetal character)
+      </p>
+      <p class="m-0" *ngIf="loginForm.get('password')?.getError('required')">
+        password is required
+      </p>
+    </div>
+    <button
+      [disabled]="loginForm.invalid"
+      type="submit"
+      class="btn bg-main border-0 text-white"
+    >
+      <i class="fas fa-spinner fa-spin" *ngIf="isLoding"></i>
+      <span *ngIf="!isLoding">Login</span>
+    </button>
+  </form>
+</div>
